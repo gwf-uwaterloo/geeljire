@@ -1,46 +1,32 @@
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> 
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
-   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-   crossorigin=""/>
- <!-- Make sure you put this AFTER Leaflet's CSS -->
- <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
-   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
-   crossorigin=""></script>
+		       integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+	 crossorigin=""/>
+<link rel="stylesheet" href="style.css">
+
+
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+	integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+ crossorigin=""></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
-<script src="leaflet-locationfilter/src/locationfilter.js"></script>
-<script src="Leaflet.draw/src/Leaflet.draw.js"></script>
-<script src="main.js"></script>
-<script src="Leaflet.Editable/src/Leaflet.Editable.js"></script>
-
-<div id="mapid" style="width: 600px; height: 400px;"></div>
-<script>
-
-
-	var mymap = L.map('mapid').setView([42, -123], 5);
-
-	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-		maxZoom: 18,
-		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-			'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-		id: 'mapbox.streets'
-	}).addTo(mymap);
-
-var data = new L.GeoJSON.AJAX("newfile.geojson",{
-    onEachFeature:onEachFeature,
-});
-
-data.on('data:loaded', function(){
-console.log(data);
-data.addTo(mymap);
-});
-var rect = L.rectangle([[59.9, 29.9], [60.1, 30.1]]);
-rect.enableEdit
-mymap.addLayer(rect);
-rect.on('dblclick', L.DomEvent.stop).on('dblclick', rect.toggleEdit);
-
-</script>
- <div id="mapid"></div>
+<div class="container-fluid">
+	<div class="row flex-xl-nowrap" id="wrapper">
+		<div id="sidebar-wrapper" class="p-0">
+			<div id="splitbar"></div>
+			<div class="sidebar-sticky ml-auto p-2">
+				<div class="accordion" id="datasetList">
+				</div>
+			</div>
+		</div>
+		<main class="ml-auto p-0" id="map-container" role="main">
+		<div id="mapid"></div>
+		</main>
+	</div>
+</div>
 <p>basin id:</p>
 <p id="demo"></p>
+<script src="index.js"></script>
+

@@ -1,0 +1,85 @@
+html, body {
+  height: 100%;
+}
+
+.bg-primary {
+    background-color: #17a2b8 !important;
+}
+
+.material-icons { color: gray; }
+
+.map-wrapper {
+    height: inherit;
+}
+
+.card-body {
+    font-size: 80%;
+}
+
+/*
+ * Sidebar
+ */
+ #sidebar-wrapper {
+     width: 40%;
+ }
+ 
+ #map-container {
+     width: 60%;
+ }
+ 
+ #splitbar {
+    background-color: gray;
+    height: 100%;
+    float: right;
+    width: 4px;
+    cursor: col-resize;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100; /* Behind the navbar */
+  padding: 50px 0 0; /* Height of navbar */
+}
+
+.sidebar-sticky {
+  position: relative;
+  top: 0;
+  height: calc(100vh - 62px);
+  padding-top: .5rem;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+@supports ((position: -webkit-sticky) or (position: sticky)) {
+  .sidebar-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+  }
+}
+
+.sidebar-heading {
+  text-transform: uppercase;
+}
+
+/*
+ * Content
+ */
+
+[role="main"] {
+  padding-top: 133px; /* Space for fixed navbar */
+  height: inherit;
+}
+
+@media (min-width: 768px) {
+  [role="main"] {
+    padding-top: 50px; /* Space for fixed navbar */
+    height: inherit;
+  }
+}
+
+#mapid { 
+    height: calc(100vh - 62px);
+ }
