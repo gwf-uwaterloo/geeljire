@@ -1,32 +1,44 @@
-<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> 
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
-		       integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-	 crossorigin=""/>
-<link rel="stylesheet" href="style.css">
+<!doctype html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> 
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+			 integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin=""/>
+		<link rel="stylesheet" href="style.css">
 
 
-<!-- Make sure you put this AFTER Leaflet's CSS -->
-<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
-	integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
- crossorigin=""></script>
+		<!-- Make sure you put this AFTER Leaflet's CSS -->
+		<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+	  integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+   crossorigin=""></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
-<div class="container-fluid">
-	<div class="row flex-xl-nowrap" id="wrapper">
-		<div id="sidebar-wrapper" class="p-0">
-			<div id="splitbar"></div>
-			<div class="sidebar-sticky ml-auto p-2">
-				<div class="accordion" id="datasetList">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+		<title>CAMELS Basin Visualization</title>
+	</head>
+	<body>
+		<header class="navbar navbar-expand sticky-top navbar-dark bg-dark flex-column flex-md-row" id="header">
+			<!-- see https://getbootstrap.com/docs/4.0/components/navbar/ -->
+			<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">CAMELS BASINS</a>
+		</header>
+		<div class="container-fluid">
+			<div class="row flex-xl-nowrap" id="wrapper">
+				<div id="sidebar-wrapper" class="p-0">
+					<div id="splitbar"></div>
+					<div class="sidebar-sticky ml-auto p-2">
+						<div class="accordion" id="datasetList">
+							<div class="container" id="cols">
+								<p>click on one of the basins to view its information</p>
+							</div>
+						</div>
+					</div>
 				</div>
+				<main class="ml-auto p-0" id="map-container" role="main">
+				<div id="mapid"></div>
+				</main>
 			</div>
 		</div>
-		<main class="ml-auto p-0" id="map-container" role="main">
-		<div id="mapid"></div>
-		</main>
-	</div>
-</div>
-<p>basin id:</p>
-<p id="demo"></p>
-<script src="index.js"></script>
-
+		<script src="index.js"></script>
+	</body>
+</html>

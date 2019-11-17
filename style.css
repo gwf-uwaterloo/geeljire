@@ -1,85 +1,84 @@
 html, body {
-  height: 100%;
+	height: 100%;
 }
 
-.bg-primary {
-    background-color: #17a2b8 !important;
-}
 
 .material-icons { color: gray; }
 
 .map-wrapper {
-    height: inherit;
+	height: inherit;
 }
 
 .card-body {
-    font-size: 80%;
+	font-size: 80%;
 }
 
 /*
  * Sidebar
  */
- #sidebar-wrapper {
-     width: 40%;
- }
- 
- #map-container {
-     width: 60%;
- }
- 
- #splitbar {
-    background-color: gray;
-    height: 100%;
-    float: right;
-    width: 4px;
-    cursor: col-resize;
-}
+	#sidebar-wrapper {
+		width: 40%;
+	}
 
-.sidebar {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 100; /* Behind the navbar */
-  padding: 50px 0 0; /* Height of navbar */
-}
+	#map-container {
+		width: 60%;
+	}
 
-.sidebar-sticky {
-  position: relative;
-  top: 0;
-  height: calc(100vh - 62px);
-  padding-top: .5rem;
-  overflow-x: hidden;
-  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-}
+	#splitbar {
+		background-color: gray;
+		height: 100%;
+		float: right;
+		width: 4px;
+		cursor: col-resize;
+	}
 
-@supports ((position: -webkit-sticky) or (position: sticky)) {
-  .sidebar-sticky {
-    position: -webkit-sticky;
-    position: sticky;
-  }
-}
+	.sidebar {
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 100; /* Behind the navbar */
+		padding: 50px 0 0; /* Height of navbar */
+	}
 
-.sidebar-heading {
-  text-transform: uppercase;
-}
+	.sidebar-sticky {
+		position: relative;
+		top: 0;
+		height: calc(100vh - 62px);
+		padding-top: .5rem;
+		overflow-x: hidden;
+		overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+	}
 
-/*
- * Content
- */
+	@supports ((position: -webkit-sticky) or (position: sticky)) {
+		.sidebar-sticky {
+			position: -webkit-sticky;
+			position: sticky;
+		}
+	}
 
-[role="main"] {
-  padding-top: 133px; /* Space for fixed navbar */
-  height: inherit;
-}
+	.sidebar-heading {
+		text-transform: uppercase;
+	}
 
-@media (min-width: 768px) {
-  [role="main"] {
-    padding-top: 50px; /* Space for fixed navbar */
-    height: inherit;
-  }
-}
+	/*
+	 * Content
+	 */
 
-#mapid { 
-    height: calc(100vh - 62px);
- }
+	[role="main"] {
+		padding-top: 133px; /* Space for fixed navbar */
+		height: inherit;
+	}
+
+
+	#mapid { 
+		height: calc(100vh - 62px);
+	}
+
+
+#cols {
+	  padding-top: 1rem;
+	    padding-bottom: 1rem;
+	      background-color: rgba(86, 61, 124, .15);
+	        border: 1px solid rgba(86, 61, 124, .2);
+	}
