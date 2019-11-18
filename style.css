@@ -73,7 +73,7 @@ html, body {
 	}
 
 
-	#cols {
+	table, th, td   {
 		padding-top: 0.5rem;
 		padding-bottom: 0.5rem;	  
 		background-color: rgba(86, 61, 124, .15);

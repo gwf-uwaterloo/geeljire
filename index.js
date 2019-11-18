@@ -43,13 +43,15 @@ data.on('data:loaded', function(){
 				data['_layers'][key].setStyle({color:perc2color(perc),weight:1 })
 		}
 	data.addTo(mymap);
+
+
 	var legend = L.control({position: 'bottomright'});
 
 	legend.onAdd = function (map) {
 
 		var div = L.DomUtil.create('div', 'info legend'),
 		grades = [0, 10, 20, 50, 100],
-		labels = [],
+		labels = ['<strong> Elevation</strong>'],
 		from, to;
 
 		for (var i = 0; i < grades.length; i++) {
@@ -58,7 +60,7 @@ data.on('data:loaded', function(){
 
 			labels.push(
 					'<i style="background:' + perc2color(from)  + '"></i> ' +
-				  Math.round(min+from/100*diff) );
+					Math.round(min+from/100*diff) );
 		}
 
 		div.innerHTML = labels.join('<br>');
@@ -86,21 +88,22 @@ function onEachFeature(feature, layer) {
 		// You can make your ajax call declaration here
 		//$.ajax(... 
 		$(datasetList).empty()
-			var data=`<div class="container" >`
+			var data=`<table class="table table-bordered">`+
+			`<tbody>`
 			Object.keys(feature["properties"]).forEach(function(k){
 				if(k=='geojson')
 					index='basin_id'
 				else 
 					index=k
-						data+=`<div class="row">`+
-						`<div class="col" id="cols">`+
+						data+=`<tr>`+
+						`<th scope=row>`+
 						index+
-						`</div>`+
-						`<div class="col" id="cols">`+
+						`</th>`+
+						`<td>`+
 						feature["properties"][k]+
-						`</div> </div>`
+						`</td> <tr>`
 			});
-		data+=`</div>`
+		data+=`</tbody></table>`
 			$(data).appendTo('#datasetList')
 	});
 
@@ -120,14 +123,21 @@ function perc2color(perc) {
 	var h = r * 0x10000 + g * 0x100 + b * 0x1;
 	return '#' + ('000000' + h.toString(16)).slice(-6);
 }
-
-function getColor(d) {
-	return d > 1000 ? '#800026' :
-		d > 500  ? '#BD0026' :
-		d > 200  ? '#E31A1C' :
-		d > 100  ? '#FC4E2A' :
-		d > 50   ? '#FD8D3C' :
-		d > 20   ? '#FEB24C' :
-		d > 10   ? '#FED976' :
-		'#FFEDA0';
-}
+// Sidebar resizing
+var minSize = 100;
+var maxSize = $(window).width() * 0.95;
+$('#splitbar').mousedown(function (e) {
+	e.preventDefault();
+	$(document).mousemove(function (e) {
+		e.preventDefault();
+		var x = e.pageX - $('#sidebar-wrapper').offset().left;
+		if (x > minSize && x < maxSize && e.pageX < ($(window).width() - minSize)) {  
+			$('#sidebar-wrapper').css("width", x);
+			$('#map-container').css("width", $(window).width() - x);
+			map.invalidateSize();
+		}
+	})
+});
+$(document).mouseup(function (e) {
+	$(document).unbind('mousemove');
+});
