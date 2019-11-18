@@ -8,8 +8,7 @@
 			 integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
     crossorigin=""/>
 		<link rel="stylesheet" href="style.css">
-
-
+		<script src="https://unpkg.com/bootstrap@4.1.2/dist/js/bootstrap.bundle.min.js"></script>
 		<!-- Make sure you put this AFTER Leaflet's CSS -->
 		<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
 	  integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
@@ -20,8 +19,20 @@
 	</head>
 	<body>
 		<header class="navbar navbar-expand sticky-top navbar-dark bg-dark flex-column flex-md-row " id="header">
+			    <ul class="navbar-nav mr-auto">
 			<!-- see https://getbootstrap.com/docs/4.0/components/navbar/ -->
+			<li class="nav-item">
 			<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">CAMELS BASINS</a>
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Colormap used</a>
+				<div class="dropdown-menu" aria-labelledby="dropdown01">
+					<a class="dropdown-item" onclick="foo(this)"  href="#">elev_mean</a>
+					<a class="dropdown-item" onclick="foo(this)"  href="#">frac_forest</a>
+					<a class="dropdown-item" onclick="foo(this)"  href="#">max_water_content</a>
+				</div>
+			</li>
+			</ul>
 		</header>
 		<div class="container-fluid">
 			<div class="row flex-xl-nowrap" id="wrapper">

@@ -12,7 +12,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 var data = new L.GeoJSON.AJAX("newfile.geojson",{
 	onEachFeature:onEachFeature,
 });
-
+var legend;
 var stations = new L.GeoJSON.AJAX("stations.geojson",{
 
 	pointToLayer: function (feature, latlng) {
@@ -39,13 +39,12 @@ data.on('data:loaded', function(){
 		for(var key in data['_layers'])
 		{
 			perc=100*(data['_layers'][key]['feature']['properties']['elev_mean']-min)/diff
-				console.log(perc)
 				data['_layers'][key].setStyle({color:perc2color(perc),weight:1 })
 		}
 	data.addTo(mymap);
 
 
-	var legend = L.control({position: 'bottomright'});
+	 legend = L.control({position: 'bottomright'});
 
 	legend.onAdd = function (map) {
 
@@ -70,8 +69,7 @@ data.on('data:loaded', function(){
 });
 
 stations.on('data:loaded',function(){
-	console.log(stations)
-		stations.addTo(mymap)
+	stations.addTo(mymap)
 });
 
 
@@ -141,3 +139,48 @@ $('#splitbar').mousedown(function (e) {
 $(document).mouseup(function (e) {
 	$(document).unbind('mousemove');
 });
+
+function foo(input){
+	colorscheme=input.innerHTML
+		mymap.removeLayer(data)
+		mymap.removeControl(legend)
+		var min=1000	
+		var max=0
+		for(var key in data['_layers'])
+		{
+			max=Math.max(data['_layers'][key]['feature']['properties'][colorscheme],max)
+				min=Math.min(data['_layers'][key]['feature']['properties'][colorscheme],min)
+		}
+	diff=max-min
+
+		for(var key in data['_layers'])
+		{
+			perc=100*(data['_layers'][key]['feature']['properties'][colorscheme]-min)/diff
+				data['_layers'][key].setStyle({color:perc2color(perc),weight:1 })
+		}
+	data.addTo(mymap);
+
+
+	legend = L.control({position: 'bottomright'});
+
+	legend.onAdd = function (map) {
+
+		var div = L.DomUtil.create('div', 'info legend'),
+		grades = [0, 10, 20, 50, 100],
+		labels = ['<strong>'+colorscheme+'</strong>'],
+		from, to;
+
+		for (var i = 0; i < grades.length; i++) {
+			from = grades[i];
+			to = grades[i + 1];
+
+			labels.push(
+					'<i style="background:' + perc2color(from)  + '"></i> ' +
+					Math.round(100*(min+from/100*diff))/100 );
+		}
+
+		div.innerHTML = labels.join('<br>');
+		return div;
+	};
+	legend.addTo(mymap);
+}
