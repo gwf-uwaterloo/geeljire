@@ -44,7 +44,7 @@ data.on('data:loaded', function(){
 	data.addTo(mymap);
 
 
-	 legend = L.control({position: 'bottomright'});
+	legend = L.control({position: 'bottomright'});
 
 	legend.onAdd = function (map) {
 
@@ -73,10 +73,7 @@ stations.on('data:loaded',function(){
 });
 
 
-var rect = L.rectangle([[59.9, 29.9], [60.1, 30.1]]);
-rect.enableEdit
-mymap.addLayer(rect);
-rect.on('dblclick', L.DomEvent.stop).on('dblclick', rect.toggleEdit);
+
 
 
 function onEachFeature(feature, layer) {
@@ -183,4 +180,30 @@ function foo(input){
 		return div;
 	};
 	legend.addTo(mymap);
+
 }
+
+
+
+(function(){
+
+	function onChange(event) {
+		var reader = new FileReader();
+		reader.onload = onReaderLoad;
+		reader.readAsText(event.target.files[0]);
+	}
+	function onReaderLoad(event){
+		console.log(event.target.result);
+		var obj = JSON.parse(event.target.result);
+		geojson = L.geoJson(obj, {
+			onEachFeature: onEachFeature
+		}).addTo(mymap);
+	}
+
+	function alert_data(name, family){
+		alert(name);
+	}
+
+	document.getElementById('file').addEventListener('change', onChange);
+
+}());
