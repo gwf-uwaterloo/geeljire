@@ -27,6 +27,7 @@ var stations = new L.GeoJSON.AJAX("stations.geojson",{
 	}
 })
 data.on('data:loaded', function(){
+	 addProperties(Object.keys(data))
 	var min=1000	
 		var max=0
 		for(var key in data['_layers'])
@@ -75,7 +76,6 @@ stations.on('data:loaded',function(){
 
 
 
-
 function onEachFeature(feature, layer) {
 	//bind click
 	layer.on('click', function (e) {
@@ -104,6 +104,20 @@ function onEachFeature(feature, layer) {
 
 }
 
+function addProperties(keys){
+
+		$(propertylist).empty()
+			var data=`<table class="table table-bordered">`+
+			`<tbody>`
+			for (x in keys){
+				if(k=='geojson')
+					index='basin_id'
+				else 
+					index=k
+						data+=`<a class="dropdown-item" onclick="recolor(this)"  href="#">elev_mean</a>`+
+			};
+			$(data).appendTo('#propertylist')
+}
 
 function perc2color(perc) {
 	var r, g, b = 0;
@@ -137,7 +151,7 @@ $(document).mouseup(function (e) {
 	$(document).unbind('mousemove');
 });
 
-function foo(input){
+function recolor(input){
 	colorscheme=input.innerHTML
 		mymap.removeLayer(data)
 		mymap.removeControl(legend)
@@ -185,6 +199,7 @@ function foo(input){
 
 
 
+
 (function(){
 
 	function onChange(event) {
@@ -207,3 +222,5 @@ function foo(input){
 	document.getElementById('file').addEventListener('change', onChange);
 
 }());
+
+
