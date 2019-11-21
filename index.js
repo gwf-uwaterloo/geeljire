@@ -27,13 +27,16 @@ var stations = new L.GeoJSON.AJAX("stations.geojson",{
 	}
 })
 data.on('data:loaded', function(){
-	var min=1000	
+	
+		var min=1000	
 		var max=0
-		for(var key in data['_layers'])
+		var key
+		for(key in data['_layers'])
 		{
 			max=Math.max(data['_layers'][key]['feature']['properties']['elev_mean'],max)
 				min=Math.min(data['_layers'][key]['feature']['properties']['elev_mean'],min)
 		}
+		addProperties(Object.keys(data['_layers'][key]['feature']['properties']))
 	diff=max-min
 
 		for(var key in data['_layers'])
@@ -44,7 +47,7 @@ data.on('data:loaded', function(){
 	data.addTo(mymap);
 
 
-	 legend = L.control({position: 'bottomright'});
+	legend = L.control({position: 'bottomright'});
 
 	legend.onAdd = function (map) {
 
@@ -73,10 +76,6 @@ stations.on('data:loaded',function(){
 });
 
 
-var rect = L.rectangle([[59.9, 29.9], [60.1, 30.1]]);
-rect.enableEdit
-mymap.addLayer(rect);
-rect.on('dblclick', L.DomEvent.stop).on('dblclick', rect.toggleEdit);
 
 
 function onEachFeature(feature, layer) {
@@ -107,6 +106,17 @@ function onEachFeature(feature, layer) {
 
 }
 
+function addProperties(keys){
+		console.log(keys)
+		$(propertylist).empty()
+			var dropdown=`<a class="dropdown-item dropdown-item-checked"  href="#">`+`None`+`</a>`
+			for (k in keys){
+				dropdown+=`<a class="dropdown-item" onclick="recolor(this)"  href="#">`+
+				keys[k]+
+				`</a>`
+			};
+			$(dropdown).appendTo('#propertylist')
+}
 
 function perc2color(perc) {
 	var r, g, b = 0;
@@ -140,7 +150,7 @@ $(document).mouseup(function (e) {
 	$(document).unbind('mousemove');
 });
 
-function foo(input){
+function recolor(input){
 	colorscheme=input.innerHTML
 		mymap.removeLayer(data)
 		mymap.removeControl(legend)
@@ -183,4 +193,33 @@ function foo(input){
 		return div;
 	};
 	legend.addTo(mymap);
+
 }
+
+
+
+
+(function(){
+
+	function onChange(event) {
+		var reader = new FileReader();
+		reader.onload = onReaderLoad;
+		reader.readAsText(event.target.files[0]);
+	}
+	function onReaderLoad(event){
+		console.log(event.target.result);
+		var obj = JSON.parse(event.target.result);
+		geojson = L.geoJson(obj, {
+			onEachFeature: onEachFeature
+		}).addTo(mymap);
+	}
+
+	function alert_data(name, family){
+		alert(name);
+	}
+
+	document.getElementById('file').addEventListener('change', onChange);
+
+}());
+
+

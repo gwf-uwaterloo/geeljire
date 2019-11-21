@@ -69,6 +69,7 @@ html, body {
 
 
 	#mapid { 
+		z-index:150; 
 		height: calc(100vh - 62px);
 	}
 
@@ -92,4 +93,20 @@ html, body {
 		float: left;
 		margin-right: 8px;
 		opacity: 0.7;
+	}
+
+.dropdown-item-checked {
+  font-weight: bold;
+
+}
+
+
+.navbar {
+	  position: static;
+  }
+.navbar .nav > li {
+	  z-index: 2000;
+  }
+#propertylist{
+	z-index:2000
 	}
