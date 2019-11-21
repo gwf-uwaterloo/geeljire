@@ -27,14 +27,16 @@ var stations = new L.GeoJSON.AJAX("stations.geojson",{
 	}
 })
 data.on('data:loaded', function(){
-	 addProperties(Object.keys(data))
-	var min=1000	
+	
+		var min=1000	
 		var max=0
-		for(var key in data['_layers'])
+		var key
+		for(key in data['_layers'])
 		{
 			max=Math.max(data['_layers'][key]['feature']['properties']['elev_mean'],max)
 				min=Math.min(data['_layers'][key]['feature']['properties']['elev_mean'],min)
 		}
+		addProperties(Object.keys(data['_layers'][key]['feature']['properties']))
 	diff=max-min
 
 		for(var key in data['_layers'])
@@ -105,18 +107,15 @@ function onEachFeature(feature, layer) {
 }
 
 function addProperties(keys){
-
+		console.log(keys)
 		$(propertylist).empty()
-			var data=`<table class="table table-bordered">`+
-			`<tbody>`
-			for (x in keys){
-				if(k=='geojson')
-					index='basin_id'
-				else 
-					index=k
-						data+=`<a class="dropdown-item" onclick="recolor(this)"  href="#">elev_mean</a>`+
+			var dropdown=`<a class="dropdown-item dropdown-item-checked"  href="#">`+`None`+`</a>`
+			for (k in keys){
+				dropdown+=`<a class="dropdown-item" onclick="recolor(this)"  href="#">`+
+				keys[k]+
+				`</a>`
 			};
-			$(data).appendTo('#propertylist')
+			$(dropdown).appendTo('#propertylist')
 }
 
 function perc2color(perc) {

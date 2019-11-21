@@ -93,3 +93,8 @@ html, body {
 		margin-right: 8px;
 		opacity: 0.7;
 	}
+
+.dropdown-item-checked {
+  font-weight: bold;
+
+}
